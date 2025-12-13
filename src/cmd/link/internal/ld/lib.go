@@ -2170,8 +2170,8 @@ func linkerFlagSupported(arch *sys.Arch, linker, altLinker, flag string) bool {
 func trimLinkerArgv(argv []string) []string {
 	flagsWithNextArgSkip := []string{
 		"-F",
-		"-l",
-		"-L",
+		// "-l",
+		// "-L",
 		"-framework",
 		"-Wl,-framework",
 		"-Wl,-rpath",
@@ -2182,6 +2182,7 @@ func trimLinkerArgv(argv []string) []string {
 		"-isysroot",
 		"--sysroot",
 		"-target",
+		"-resource-dir",
 	}
 	prefixesToKeep := []string{
 		"-f",
@@ -2192,6 +2193,11 @@ func trimLinkerArgv(argv []string) []string {
 		"-isysroot",
 		"--sysroot",
 		"-target",
+		"-B",
+		"-l",
+		"-L",
+		"-no", // -nodefaultlibs, -nostdlibinc etc...
+		"-resource-dir",
 	}
 
 	var flags []string
